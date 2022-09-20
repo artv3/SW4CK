@@ -157,7 +157,7 @@ void curvilinear4sg_ci(
                                    2, RAJA::hip_thread_x_direct,
                                    RAJA::statement::Lambda<0>>>>>>>>>;
 
-  using launch_policy = RAJA::expt::LaunchPolicy<RAJA::expt::hip_launch_t<true>>;
+  using launch_policy = RAJA::expt::LaunchPolicy<RAJA::expt::hip_launch_t<true,256>>;
   using global_thread_x = RAJA::expt::LoopPolicy<RAJA::expt::hip_global_thread_x>;
   using global_thread_y = RAJA::expt::LoopPolicy<RAJA::expt::hip_global_thread_y>;
   using global_thread_z = RAJA::expt::LoopPolicy<RAJA::expt::hip_global_thread_z>;
@@ -937,7 +937,6 @@ void curvilinear4sg_ci(
         RAJA::make_tuple(k_range, j_range, i_range),
         [=] RAJA_DEVICE(int k, int j, int i) {
           */
-
           const int BlkSZ_x = 64;
           const int BlkSZ_y = 2;
           const int BlkSZ_z = 2;
